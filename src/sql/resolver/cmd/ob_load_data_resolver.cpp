@@ -907,7 +907,7 @@ int ObLoadDataResolver::resolve_column_ref_expr(ObIArray<ObQualifiedName> &colum
  * This function examines subqueries in set clause recursively,
  * and ensures that no subquery read data from the loaded table.
  *
- * Call deepth has already examined in subquery resolving phase,
+ * Call depth has already examined in subquery resolving phase,
  * don't need to do it again
 */
 int recursively_check_subquery_tables(ObSelectStmt *subquery_stmt, uint64_t loaded_table_id)

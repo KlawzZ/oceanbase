@@ -50,7 +50,7 @@ struct ObGeoColumnInfo
 
 typedef common::ObDList<ObKeyPart> ObKeyPartList;
 typedef common::ParamStore ParamsIArray;
-typedef common::ObIArray<ObExprConstraint> ExprConstrantArray;
+typedef common::ObIArray<ObExprConstraint> ExprConstraintArray;
 typedef common::ObIArray<ObRawExpr *> ExprIArray;
 typedef common::ObIArray<ColumnItem> ColumnIArray;
 typedef common::ObPooledAllocator<common::hash::HashMapTypes<uint64_t, ObGeoColumnInfo>::AllocType,
@@ -87,7 +87,7 @@ private:
   struct ObQueryRangeCtx
   {
     ObQueryRangeCtx(ObExecContext *exec_ctx,
-                    ExprConstrantArray *expr_constraints,
+                    ExprConstraintArray *expr_constraints,
                     const ParamsIArray *params)
       : need_final_extract_(false),
         max_valid_offset_(-1),
@@ -115,7 +115,7 @@ private:
     int64_t range_optimizer_max_mem_size_;
     common::ObSEArray<ObRangeExprItem, 4, common::ModulePageAllocator, true> precise_range_exprs_;
     ObExecContext *exec_ctx_;
-    ExprConstrantArray *expr_constraints_;
+    ExprConstraintArray *expr_constraints_;
     const ParamsIArray *params_;
     common::ObSEArray<const ObRawExpr *, 16> final_exprs_;
     ObSEArray<ObKeyPartPos*, 8> key_part_pos_array_;
@@ -357,10 +357,10 @@ public:
 
   void reset();
 
-  //  preliminary_extract_query_range will prelininary extract query range
+  //  preliminary_extract_query_range will preliminary extract query range
   //  from query conditions, which is only occurred in generating the physical plan.
   //  During this stage, some consts are not really known, for example,
-  //  prepared params, session variables, global variables, now(), curret_timestamp(),
+  //  prepared params, session variables, global variables, now(), current_timestamp(),
   //  utc_timestamp, etc..
 
   //  final extraction may be need in physical plan open.
@@ -371,7 +371,7 @@ public:
                                       const ObRawExpr *expr_root,
                                       const common::ObDataTypeCastParams &dtc_params,
                                       ObExecContext *exec_ctx,
-                                      ExprConstrantArray *expr_constraints = NULL,
+                                      ExprConstraintArray *expr_constraints = NULL,
                                       const ParamsIArray *params = NULL,
                                       const bool use_in_optimization = false);
   /**
@@ -392,14 +392,14 @@ public:
                                       const ExprIArray &root_exprs,
                                       const common::ObDataTypeCastParams &dtc_params,
                                       ObExecContext *exec_ctx,
-                                      ExprConstrantArray *expr_constraints = NULL,
+                                      ExprConstraintArray *expr_constraints = NULL,
                                       const ParamsIArray *params = NULL,
                                       const bool phy_rowid_for_table_loc = false,
                                       const bool ignore_calc_failure = true,
                                       const bool use_in_optimization = false);
 
   //  final_extract_query_range extracts the final query range of its physical plan.
-  //  It will get the real-time value of some const which are unknow during physical plan generating.
+  //  It will get the real-time value of some const which are unknown during physical plan generating.
   //  Query range can not be used until this function is called.
 
   int final_extract_query_range(ObExecContext &exec_ctx,
@@ -508,7 +508,7 @@ private:
   int init_query_range_ctx(common::ObIAllocator &allocator,
                            const ColumnIArray &range_columns,
                            ObExecContext *exec_ctx,
-                           ExprConstrantArray *expr_constraints,
+                           ExprConstraintArray *expr_constraints,
                            const ParamsIArray *params,
                            const bool phy_rowid_for_table_loc,
                            const bool ignore_calc_failure,
@@ -805,7 +805,7 @@ private:
   ObKeyPart *deep_copy_key_part(ObKeyPart *key_part);
   void print_keypart(const ObKeyPart *keypart, const ObString &prefix) const;
   int64_t range_graph_to_string(char *buf, const int64_t buf_len, ObKeyPart *key_part) const;
-  bool is_get_graph(int deepth, ObKeyPart *key_part);
+  bool is_get_graph(int depth, ObKeyPart *key_part);
   int get_like_range(const common::ObObj &pattern, const common::ObObj &escape,
                      ObKeyPart &out_key_part, const ObDataTypeCastParams &dtc_params);
   int get_geo_range(const common::ObObj &wkb, const common::ObGeoRelationType op_type, ObKeyPart *out_key_part);

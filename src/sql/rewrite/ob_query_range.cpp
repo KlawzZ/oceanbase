@@ -157,7 +157,7 @@ void ObQueryRange::reset()
 int ObQueryRange::init_query_range_ctx(ObIAllocator &allocator,
                                        const ColumnIArray &range_columns,
                                        ObExecContext *exec_ctx,
-                                       ExprConstrantArray *expr_constraints,
+                                       ExprConstraintArray *expr_constraints,
                                        const ParamsIArray *params,
                                        const bool phy_rowid_for_table_loc,
                                        const bool ignore_calc_failure,
@@ -262,7 +262,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
                                                   const ObRawExpr *expr_root,
                                                   const ObDataTypeCastParams &dtc_params,
                                                   ObExecContext *exec_ctx,
-                                                  ExprConstrantArray *expr_constraints /* = NULL */,
+                                                  ExprConstraintArray *expr_constraints /* = NULL */,
                                                   const ParamsIArray *params /* = NULL */,
                                                   const bool use_in_optimization /* = false */)
 {
@@ -729,7 +729,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
                                                   const ExprIArray &root_exprs,
                                                   const ObDataTypeCastParams &dtc_params,
                                                   ObExecContext *exec_ctx,
-                                                  ExprConstrantArray *expr_constraints /* = NULL */,
+                                                  ExprConstraintArray *expr_constraints /* = NULL */,
                                                   const ParamsIArray *params /* = NULL */,
                                                   const bool phy_rowid_for_table_loc /* = false*/,
                                                   const bool ignore_calc_failure /* = true*/,
@@ -741,7 +741,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
   has_exec_param_ = false;
   ObKeyPartList geo_ranges;
   bool has_geo_expr = false;
-  SQL_REWRITE_LOG(DEBUG, "preliminary extract", K(range_columns), K(root_exprs), K(use_in_optimization));
+  SQL_REWRITE_LOG(DEBUG, "preliminarysssssssssssss extract", K(range_columns), K(root_exprs), K(use_in_optimization));
   ObSEArray<ObRawExpr *, 16> candi_exprs;
   ObArenaAllocator ctx_allocator(ObModIds::OB_QUERY_RANGE_CTX);
   if (OB_FAIL(init_query_range_ctx(ctx_allocator, range_columns, exec_ctx,
