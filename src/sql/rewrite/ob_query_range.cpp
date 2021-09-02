@@ -157,7 +157,7 @@ void ObQueryRange::reset()
 int ObQueryRange::init_query_range_ctx(ObIAllocator &allocator,
                                        const ColumnIArray &range_columns,
                                        ObExecContext *exec_ctx,
-                                       ExprConstrantArray *expr_constraints,
+                                       ExprConstraintArray *expr_constraints,
                                        const ParamsIArray *params,
                                        const bool phy_rowid_for_table_loc,
                                        const bool ignore_calc_failure,
@@ -262,7 +262,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
                                                   const ObRawExpr *expr_root,
                                                   const ObDataTypeCastParams &dtc_params,
                                                   ObExecContext *exec_ctx,
-                                                  ExprConstrantArray *expr_constraints /* = NULL */,
+                                                  ExprConstraintArray *expr_constraints /* = NULL */,
                                                   const ParamsIArray *params /* = NULL */,
                                                   const bool use_in_optimization /* = false */)
 {
@@ -729,7 +729,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
                                                   const ExprIArray &root_exprs,
                                                   const ObDataTypeCastParams &dtc_params,
                                                   ObExecContext *exec_ctx,
-                                                  ExprConstrantArray *expr_constraints /* = NULL */,
+                                                  ExprConstraintArray *expr_constraints /* = NULL */,
                                                   const ParamsIArray *params /* = NULL */,
                                                   const bool phy_rowid_for_table_loc /* = false*/,
                                                   const bool ignore_calc_failure /* = true*/,
