@@ -3216,11 +3216,11 @@ int ObBasicSessionInfo::process_session_time_zone_value(const ObObj &value,
 {
   int ret = OB_SUCCESS;
   ObString str_val;
-  const bool is_oralce_mode = is_oracle_compatible();
+  const bool is_oracle_mode = is_oracle_compatible();
   if (OB_FAIL(value.get_string(str_val))) {
     LOG_WARN("fail to get string value", K(value), K(ret));
-  } else if (OB_FAIL(set_time_zone(str_val, is_oralce_mode, check_timezone_valid))) {
-    LOG_WARN("failed to set time zone", K(str_val), K(is_oralce_mode), "is_oracle_compatible", is_oracle_compatible(), K(ret));
+  } else if (OB_FAIL(set_time_zone(str_val, is_oracle_mode, check_timezone_valid))) {
+    LOG_WARN("failed to set time zone", K(str_val), K(is_oracle_mode), "is_oracle_compatible", is_oracle_compatible(), K(ret));
   }
   return ret;
 }
@@ -5987,7 +5987,7 @@ int ObBasicSessionInfo::restore_mutating(uint64_t table_id, stmt::StmtType saved
   return ret;
 }
 
-int ObBasicSessionInfo::set_time_zone(const ObString &str_val, const bool is_oralce_mode,
+int ObBasicSessionInfo::set_time_zone(const ObString &str_val, const bool is_oracle_mode,
                                      const bool check_timezone_valid)
 {
   int ret = OB_SUCCESS;
@@ -5995,7 +5995,7 @@ int ObBasicSessionInfo::set_time_zone(const ObString &str_val, const bool is_ora
   int ret_more = OB_SUCCESS;
 
   if (OB_FAIL(ObTimeConverter::str_to_offset(str_val, offset, ret_more,
-                                                    is_oralce_mode, check_timezone_valid))) {
+                                                    is_oracle_mode, check_timezone_valid))) {
     if (ret != OB_ERR_UNKNOWN_TIME_ZONE) {
       LOG_WARN("fail to convert time zone", K(str_val), K(ret));
     }
@@ -6019,7 +6019,7 @@ int ObBasicSessionInfo::set_time_zone(const ObString &str_val, const bool is_ora
                                                                             str_val.ptr(),
                                                                             str_val.length()));
       ObString val_no_sp(no_sp_len, str_val.ptr());
-      if (is_oralce_mode) {
+      if (is_oracle_mode) {
         val_no_sp = val_no_sp.trim();
       }
       //note:要先获取start service time；如果先find再获取start_service_time，start_service_time可能在这个时间窗口中被更改
@@ -6039,7 +6039,7 @@ int ObBasicSessionInfo::set_time_zone(const ObString &str_val, const bool is_ora
           LOG_INFO("ignore unknow time zone, perhaps in remote/distribute task processer when server start_time is zero", K(str_val));
           offset = 0;
           if (OB_FAIL(ObTimeConverter::str_to_offset(ObString("+8:00"), offset, ret_more,
-                                                    is_oralce_mode, check_timezone_valid))) {
+                                                    is_oracle_mode, check_timezone_valid))) {
             if (ret != OB_ERR_UNKNOWN_TIME_ZONE) {
               LOG_WARN("fail to convert time zone", K(str_val), K(ret));
             }

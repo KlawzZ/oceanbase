@@ -467,7 +467,7 @@ public:
   const common::ObString get_local_nls_timestamp_format() const;
   const common::ObString get_local_nls_timestamp_tz_format() const;
   int get_local_nls_format(const ObObjType type, ObString &format_str) const;
-  int set_time_zone(const common::ObString &str_val, const bool is_oralce_mode,
+  int set_time_zone(const common::ObString &str_val, const bool is_oracle_mode,
                     const bool need_check_valid /* true */);
 
   //getters
