@@ -195,7 +195,7 @@ int ObUpdateResolver::try_expand_returning_exprs()
   int ret = OB_SUCCESS;
   ObUpdateStmt *update_stmt = NULL;
   // we do not need expand returing expr in prepare stage because we resolve
-  // it twice, first in prepare stage, second in actural execution. We can only
+  // it twice, first in prepare stage, second in actual execution. We can only
   // do it in second stage
   // Otherwise if we expand in prepare stage, which will pollute our spell SQL
   // then got a wrong result
