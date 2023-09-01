@@ -747,7 +747,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
   if (OB_FAIL(init_query_range_ctx(ctx_allocator, range_columns, exec_ctx,
                                    expr_constraints, params, phy_rowid_for_table_loc,
                                    ignore_calc_failure, use_in_optimization))) {
-    LOG_WARN("init query range context failed", K(ret));
+    LOG_WARN("init query range context failedsssssssssss", K(ret));
   } else if (OB_ISNULL(query_range_ctx_)) {
     ret = OB_NOT_INIT;
     LOG_WARN("query_range_ctx_ is not inited.", K(ret));
