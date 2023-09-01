@@ -752,7 +752,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
     ret = OB_NOT_INIT;
     LOG_WARN("query_range_ctx_ is not inited.", K(ret));
   } else if (OB_FAIL(extract_valid_exprs(root_exprs, candi_exprs))) {
-    LOG_WARN("failed to extract candidate rassssssssssssssssssssssnge exprs", K(ret));
+    LOG_WARN("failed to extract cssssandidate rassssssssssssssssssssssnge exprs", K(ret));
   } else if (candi_exprs.empty()) {
     GET_ALWAYS_TRUE_OR_FALSE(true, temp_result);
     if (OB_SUCC(ret) && !and_ranges.add_last(temp_result)) {
