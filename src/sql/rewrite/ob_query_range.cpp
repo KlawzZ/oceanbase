@@ -757,7 +757,7 @@ int ObQueryRange::preliminary_extract_query_range(const ColumnIArray &range_colu
     GET_ALWAYS_TRUE_OR_FALSE(true, temp_result);
     if (OB_SUCC(ret) && !and_ranges.add_last(temp_result)) {
       ret = OB_ERR_UNEXPECTED;
-      LOG_WARN("add key part sssssrange failed", K(ret));
+      LOG_WARN("add key part sssssrange fasssssssiled", K(ret));
     }
   } else {
     for (int64_t i = 0; OB_SUCC(ret) && i < candi_exprs.count(); ++i) {
